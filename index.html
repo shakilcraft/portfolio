@@ -1535,6 +1535,11 @@ Design with purpose. Develop with passion. Create with imagination.
   }
 })();
 </script>
-
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const badge = document.querySelector("[data-netlify-deploy-badge]");
+    if (badge) badge.remove();
+  });
+</script>
 </body>
 </html>
