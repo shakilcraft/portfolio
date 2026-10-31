@@ -809,6 +809,14 @@ dialog.legal-modal ul { padding-left: 1.25rem; list-style: disc; }
   }
   .reveal { opacity: 1; transform: none; }
 }
+   /* Hide Netlify Badge */
+#netlify-badge, 
+iframe[src*="netlify"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 </style>
 </head>
 
