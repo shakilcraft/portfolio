@@ -810,10 +810,21 @@ dialog.legal-modal ul { padding-left: 1.25rem; list-style: disc; }
   .reveal { opacity: 1; transform: none; }
 }
  /* Hide Netlify badge */
+/* Remove Netlify badge */
+[data-netlify-deploy-badge] {
+  display: none !important;
+}
+   
 [data-netlify-deploy-badge],
 .netlify-badge,
 a[href*="netlify.com"][style*="position: fixed"],
 a[href*="netlify.com"][style*="position:fixed"] {
+  display: none !important;
+}
+
+[data-netlify-deploy-badge],
+.netlify-identity-menu-btn,
+a[href*="netlify.com"][style*="fixed"] {
   display: none !important;
 }
 </style>
