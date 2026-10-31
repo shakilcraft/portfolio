@@ -1561,8 +1561,7 @@ I'm always curious, continuously learning, and excited about what can be created
   }
 })();
    
-  /* ---------- INTERACTIVE SKILLS COLOR ---------- */
-  var skillsSection = document.getElementById('skills');
+   /* ---------- PERMANENT SKILLS COLOR ---------- */
   var skillPills = document.querySelectorAll('.skill-pill');
 
   var techColors = {
@@ -1585,42 +1584,19 @@ I'm always curious, continuously learning, and excited about what can be created
     'REST APIs': { bg: '#10B981', text: '#ffffff' }
   };
 
-  if (skillsSection) {
-    var hint = document.createElement('p');
-    hint.style.cssText = "font-size: 0.8rem; color: var(--text-subtle); margin-top: -1.5rem; margin-bottom: 2rem; font-family: 'JetBrains Mono', monospace;";
-    hint.textContent = "// Click anywhere in this section to reveal tech colors";
-    
-    var container = skillsSection.querySelector('.container');
-    var grid = skillsSection.querySelector('.grid-2');
-    if (container && grid) {
-       container.insertBefore(hint, grid);
+  // Apply the colors immediately when the page loads
+  skillPills.forEach(function(pill) {
+    var techName = pill.textContent.trim();
+    var colorData = techColors[techName];
+
+    if (colorData) {
+      pill.style.backgroundColor = colorData.bg;
+      pill.style.color = colorData.text;
+      pill.style.borderColor = colorData.bg;
+      pill.style.fontWeight = '600';
+      pill.style.boxShadow = '0 4px 12px ' + colorData.bg + '30'; // Slight permanent glow
     }
-
-    skillsSection.addEventListener('click', function() {
-      var isColored = skillsSection.classList.toggle('is-colored');
-
-      skillPills.forEach(function(pill) {
-        var techName = pill.textContent.trim();
-        var colorData = techColors[techName];
-
-        if (colorData) {
-          if (isColored) {
-            pill.style.backgroundColor = colorData.bg;
-            pill.style.color = colorData.text;
-            pill.style.borderColor = colorData.bg;
-            pill.style.fontWeight = '600';
-            pill.style.boxShadow = '0 4px 12px ' + colorData.bg + '40'; 
-          } else {
-            pill.style.backgroundColor = '';
-            pill.style.color = '';
-            pill.style.borderColor = '';
-            pill.style.fontWeight = '';
-            pill.style.boxShadow = '';
-          }
-        }
-      });
-    });
-  }
+  });
 </script>
   <script>
   const frame = document.getElementById('nl-badge-frame');
