@@ -809,6 +809,20 @@ dialog.legal-modal ul { padding-left: 1.25rem; list-style: disc; }
   }
   .reveal { opacity: 1; transform: none; }
 }
+   /* Force logo to be fully transparent and blend nicely */
+.logo img {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  /* This makes dark backgrounds in the image disappear on dark mode */
+  mix-blend-mode: screen; 
+}
+
+/* Make sure it looks good in Light Mode too */
+html:not(.dark) .logo img {
+  mix-blend-mode: multiply;
+}
  /* Hide Netlify badge */
 /* Remove Netlify badge */
 [data-netlify-deploy-badge] {
