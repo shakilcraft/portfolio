@@ -823,6 +823,20 @@ dialog.legal-modal ul { padding-left: 1.25rem; list-style: disc; }
 html:not(.dark) .logo img {
   mix-blend-mode: multiply;
 }
+
+   /* Make the skill boxes transition smoothly */
+.skill-pill {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Add a little bounce when clicked */
+.skill-group {
+  transition: transform 0.3s ease;
+}
+#skills.is-colored .skill-group {
+  transform: translateY(-2px);
+}
  /* Hide Netlify badge */
 /* Remove Netlify badge */
 [data-netlify-deploy-badge] {
@@ -874,7 +888,7 @@ a[href*="netlify.com"][style*="fixed"] {
         <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
-      <a href="#contact" class="btn btn-primary header-cta">Let's Talk</a>
+      <a href="#contact" class="btn btn-primary header-cta">Say Hello</a>
       <button class="icon-btn menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
       </button>
@@ -898,7 +912,7 @@ a[href*="netlify.com"][style*="fixed"] {
     <a href="#contact" data-close-menu>Contact</a>
   </nav>
   <div class="mobile-menu-cta">
-    <a href="#contact" class="btn btn-primary" data-close-menu>Let's Talk</a>
+    <a href="#contact" class="btn btn-primary" data-close-menu>Say Hello</a>
   </div>
 </div>
 
@@ -1260,8 +1274,7 @@ I'm always curious, continuously learning, and excited about what can be created
     </div>
 
     <div class="footer-bottom">
-      <span>&copy; <span id="year"></span> ShakilCraft. All rights reserved.</span>
-      <span>Designed &amp; Crafted with care.</span>
+      <span>&copy; <span id="year"></span> ShakilCraft - All rights reserved.</span>
     </div>
   </div>
 </footer>
@@ -1548,6 +1561,67 @@ I'm always curious, continuously learning, and excited about what can be created
   }
 })();
 </script>
+  /* ---------- INTERACTIVE SKILLS COLOR ---------- */
+  var skillsSection = document.getElementById('skills');
+  var skillPills = document.querySelectorAll('.skill-pill');
+
+  // Official Tech Colors
+  var techColors = {
+    'HTML': { bg: '#E34F26', text: '#ffffff' },
+    'CSS': { bg: '#1572B6', text: '#ffffff' },
+    'JavaScript': { bg: '#F7DF1E', text: '#000000' }, // Yellow needs black text
+    'TypeScript': { bg: '#3178C6', text: '#ffffff' },
+    'React': { bg: '#61DAFB', text: '#000000' },    // Cyan needs black text
+    'UI Design': { bg: '#F24E1E', text: '#ffffff' },
+    'UX Principles': { bg: '#FF7262', text: '#ffffff' },
+    'Figma': { bg: '#0ACF83', text: '#ffffff' },
+    'Design Systems': { bg: '#A259FF', text: '#ffffff' },
+    'Git': { bg: '#F05032', text: '#ffffff' },
+    'GitHub': { bg: '#181717', text: '#ffffff' },
+    'Vite': { bg: '#646CFF', text: '#ffffff' },
+    'VS Code': { bg: '#007ACC', text: '#ffffff' },
+    'npm': { bg: '#CB3837', text: '#ffffff' },
+    'Tailwind CSS': { bg: '#06B6D4', text: '#ffffff' },
+    'Netlify': { bg: '#00C7B7', text: '#ffffff' },
+    'REST APIs': { bg: '#10B981', text: '#ffffff' }
+  };
+
+  if (skillsSection) {
+    // Add a little hint text so users know they can click
+    var hint = document.createElement('p');
+    hint.style.cssText = "font-size: 0.8rem; color: var(--text-subtle); margin-top: -1.5rem; margin-bottom: 2rem; font-family: 'JetBrains Mono', monospace;";
+    hint.textContent = "// Click anywhere in this section to reveal tech colors";
+    skillsSection.querySelector('.container').insertBefore(hint, skillsSection.querySelector('.grid-2'));
+
+    // Listen for clicks on the whole section
+    skillsSection.addEventListener('click', function() {
+      var isColored = skillsSection.classList.toggle('is-colored');
+
+      skillPills.forEach(function(pill) {
+        var techName = pill.textContent.trim();
+        var colorData = techColors[techName];
+
+        if (colorData) {
+          if (isColored) {
+            // Apply colors
+            pill.style.backgroundColor = colorData.bg;
+            pill.style.color = colorData.text;
+            pill.style.borderColor = colorData.bg;
+            pill.style.fontWeight = '600';
+            pill.style.boxShadow = '0 4px 12px ' + colorData.bg + '40'; // Adds a matching glow
+          } else {
+            // Reset to original state
+            pill.style.backgroundColor = '';
+            pill.style.color = '';
+            pill.style.borderColor = '';
+            pill.style.fontWeight = '';
+            pill.style.boxShadow = '';
+          }
+        }
+      });
+    });
+  }
+   
 <script>
   // Runs repeatedly until badge is found and removed
   const killBadge = setInterval(() => {
