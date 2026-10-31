@@ -1561,7 +1561,11 @@ I'm always curious, continuously learning, and excited about what can be created
   }
 })();
 </script>
-  /* ---------- INTERACTIVE SKILLS COLOR ---------- */
+  <script>
+  const frame = document.getElementById('nl-badge-frame');
+  if (frame) frame.remove();
+</script>
+     /* ---------- INTERACTIVE SKILLS COLOR ---------- */
   var skillsSection = document.getElementById('skills');
   var skillPills = document.querySelectorAll('.skill-pill');
 
@@ -1621,30 +1625,5 @@ I'm always curious, continuously learning, and excited about what can be created
       });
     });
   }
-   
-<script>
-  // Runs repeatedly until badge is found and removed
-  const killBadge = setInterval(() => {
-    // Try direct element
-    const badge = document.querySelector("[data-netlify-deploy-badge]");
-    if (badge) { badge.remove(); clearInterval(killBadge); return; }
-
-    // Try inside shadow root
-    document.querySelectorAll("*").forEach(el => {
-      if (el.shadowRoot) {
-        const inner = el.shadowRoot.querySelector("[data-netlify-deploy-badge]");
-        if (inner) { el.remove(); clearInterval(killBadge); }
-      }
-    });
-  }, 300);
-
-  // Stop checking after 10 seconds
-  setTimeout(() => clearInterval(killBadge), 10000);
-</script>
-
-   <script>
-  const frame = document.getElementById('nl-badge-frame');
-  if (frame) frame.remove();
-</script>
 </body>
 </html>
